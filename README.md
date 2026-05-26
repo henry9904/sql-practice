@@ -10,7 +10,7 @@
 
 **데이터 엔지니어를 향한 SQL 학습 기록**
 
-[학습 노트 사이트](https://henry9904.github.io/sql-practice/) · [SQLD 노트](sqld/) · [프로그래머스 풀이](programmers/) · [LeetCode](leetcode/)
+[학습 노트 사이트](https://henry9904.github.io/sql-practice/) · [SQLD 노트](docs/sqld/) · [프로그래머스 풀이](docs/programmers/) · [LeetCode](docs/leetcode/)
 
 </div>
 
