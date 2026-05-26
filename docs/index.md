@@ -63,4 +63,11 @@ gantt
 - [05. GROUP BY · ORDER BY](sqld/05_GROUP_BY_ORDER_BY.md)
 - [06. JOIN](sqld/06_JOIN.md)
 - [07. 서브쿼리 & 계층형](sqld/07_서브쿼리_계층형.md)
-- [08. 윈도우 함수 · DCL](sqld/08_윈도우함수_그룹함수.md)
+- [08. 윈도우 함수 · TOP-N · DCL](sqld/08_윈도우함수_그룹함수.md)
+
+### 2024 개정 신규 항목 (시험 출제 우선)
+- [09. PIVOT · UNPIVOT](sqld/09_PIVOT_UNPIVOT.md)
+- [10. 정규표현식](sqld/10_정규표현식.md)
+
+### 관리 구문
+- [11. DB 오브젝트 (View · Sequence · Synonym)](sqld/11_오브젝트_시퀀스_시노님.md)

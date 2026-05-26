@@ -167,19 +167,36 @@ SELECT PLAYER_NAME + '선수, ' + HEIGHT + 'cm' AS 정보 FROM PLAYER;
 
 ---
 
-## 5. MERGE (Oracle)
+## 5. ★ MERGE (Oracle)
 
-> "INSERT + UPDATE를 한 번에" — 조건에 따라 분기
+> "INSERT + UPDATE + DELETE를 한 번에" — 조건에 따라 분기
 
+### 기본 구조
 ```sql
-MERGE INTO EMP_TARGET T
-USING EMP_SOURCE S
-ON (T.EMPNO = S.EMPNO)
+MERGE INTO 대상테이블 T
+USING 소스테이블 S
+ON (T.키 = S.키)
 WHEN MATCHED THEN
-    UPDATE SET T.SAL = S.SAL
+    UPDATE SET ...
+    [DELETE WHERE 조건]
 WHEN NOT MATCHED THEN
-    INSERT (EMPNO, ENAME, SAL) VALUES (S.EMPNO, S.ENAME, S.SAL);
+    INSERT (칼럼...) VALUES (값...);
 ```
+
+### 예시
+```sql
+MERGE INTO STUDENT T
+USING STUDENT_TMP S
+ON (T.ID = S.ID)
+WHEN MATCHED THEN
+    UPDATE SET T.NAME = S.NAME
+    DELETE WHERE S.STATUS = 'D'         -- 매칭된 행 중 추가 조건 만족 시 삭제
+WHEN NOT MATCHED THEN
+    INSERT (ID, NAME) VALUES (S.ID, S.NAME);
+```
+
+- 매칭: UPDATE → 추가 조건 만족 시 DELETE
+- 비매칭: INSERT
 
 ---
 
@@ -240,6 +257,128 @@ ROLLBACK;
 
 ---
 
+## 7. ★★ 트랜잭션 격리성 (Isolation) — 출제 단골
+
+### 고립성(Isolation)이 낮을 때 발생 문제
+
+| 현상 | 설명 |
+|---|---|
+| **Dirty Read** | 다른 트랜잭션이 **수정 중 (커밋 X) 데이터**를 읽음 |
+| **Non-Repeatable Read** | 같은 쿼리를 두 번 했는데 **사이에 수정/삭제** 되어 결과가 다름 |
+| **Phantom Read** | 같은 쿼리를 두 번 했는데 **사이에 추가**되어 새 행이 나타남 |
+
+### 격리 수준 (Isolation Level)
+
+| 레벨 | Dirty Read | Non-Repeatable | Phantom |
+|---|---|---|---|
+| READ UNCOMMITTED | 발생 | 발생 | 발생 |
+| READ COMMITTED (기본) | X | 발생 | 발생 |
+| REPEATABLE READ | X | X | 발생 |
+| SERIALIZABLE | X | X | X |
+
+---
+
+## 8. ★ 데이터 무결성 (Integrity)
+
+| 무결성 | 설명 |
+|---|---|
+| **개체 무결성** | PK가 NULL 아니고 중복 없음 |
+| **참조 무결성** | FK는 부모 테이블 PK 또는 NULL |
+| **도메인 무결성** | 각 속성 값이 도메인(타입·범위) 내 |
+| **NULL 무결성** | NOT NULL 컬럼에 NULL 불가 |
+| **고유 무결성** | UNIQUE 컬럼 값 중복 불가 |
+| **키 무결성** | 한 릴레이션에 적어도 하나의 키 존재 |
+
+---
+
+## 9. ★ 제약조건 자세히
+
+### PRIMARY KEY (기본키)
+- 유일성 + NOT NULL
+- 한 테이블에 **하나만**
+- 자동으로 UNIQUE INDEX 생성
+- CREATE AS SELECT 시 **복제 X**
+
+```sql
+-- 단일 컬럼 PK
+CREATE TABLE EMP (
+    EMPNO NUMBER PRIMARY KEY,
+    ...
+);
+
+-- 복합 PK
+CREATE TABLE ORDER_DETAIL (
+    ORDER_ID NUMBER,
+    PRODUCT_ID NUMBER,
+    QUANTITY NUMBER,
+    CONSTRAINT PK_ORDER_DETAIL PRIMARY KEY (ORDER_ID, PRODUCT_ID)
+);
+
+-- 기존 테이블에 PK 추가
+ALTER TABLE EMP ADD CONSTRAINT PK_EMP PRIMARY KEY (EMPNO);
+
+-- PK 삭제 (자동 인덱스도 삭제됨)
+ALTER TABLE EMP DROP CONSTRAINT PK_EMP;
+```
+
+### UNIQUE
+- 중복 불가, **NULL은 중복 허용**
+- 한 테이블에 **여러 개** 가능
+- 자동 인덱스 생성
+
+```sql
+CREATE TABLE USERS (
+    EMAIL VARCHAR2(100) UNIQUE,
+    CONSTRAINT UK_NAME_PHONE UNIQUE (NAME, PHONE)  -- 복합 UNIQUE
+);
+```
+
+### NOT NULL
+- NULL 값 금지
+- ★ ALTER 시 `ADD`가 아닌 `MODIFY` 사용
+
+```sql
+ALTER TABLE EMP MODIFY ENAME NOT NULL;
+```
+
+### ★ FOREIGN KEY (외래키)
+- 부모 테이블의 PK 또는 UNIQUE 참조
+- 참조 무결성 보장
+
+```sql
+CREATE TABLE EMP (
+    EMPNO NUMBER PRIMARY KEY,
+    DEPT_ID NUMBER,
+    CONSTRAINT FK_EMP_DEPT FOREIGN KEY (DEPT_ID)
+        REFERENCES DEPT(DEPT_ID)
+);
+```
+
+### ★ FK 옵션 (부모 행 삭제 시 동작)
+
+| 옵션 | 동작 |
+|---|---|
+| (옵션 없음) | 자식이 참조 중이면 부모 삭제 **불가** (기본) |
+| `ON DELETE CASCADE` | 부모 삭제 시 **자식도 자동 삭제** |
+| `ON DELETE SET NULL` | 부모 삭제 시 자식 FK를 **NULL로 설정** |
+
+```sql
+CONSTRAINT FK_EMP_DEPT FOREIGN KEY (DEPT_ID)
+    REFERENCES DEPT(DEPT_ID) ON DELETE CASCADE
+```
+
+### CHECK
+- 컬럼 값이 특정 조건 만족하도록 강제
+
+```sql
+CREATE TABLE EMP (
+    SALARY NUMBER CHECK (SALARY >= 0),
+    AGE NUMBER CHECK (AGE BETWEEN 0 AND 150)
+);
+```
+
+---
+
 ## 시험 핵심 체크리스트
 
 - [ ] DML/DDL/DCL/TCL 명령어 분류
@@ -251,3 +390,9 @@ ROLLBACK;
 - [ ] SAVEPOINT 동작 방식
 - [ ] Oracle vs SQL Server COMMIT 차이
 - [ ] CHAR vs VARCHAR2 차이
+- [ ] **★ 격리성 이슈 3가지 (Dirty Read / Non-Repeatable / Phantom)**
+- [ ] 격리 수준 4가지와 발생 가능 현상
+- [ ] 6가지 데이터 무결성 (개체·참조·도메인·NULL·고유·키)
+- [ ] UNIQUE는 NULL 중복 허용
+- [ ] **★ FK 옵션 (ON DELETE CASCADE / SET NULL)**
+- [ ] MERGE의 MATCHED / NOT MATCHED 분기

@@ -56,8 +56,8 @@ sql-practice/
 ├── .github/workflows/      # GitHub Actions (자동 배포)
 ├── docs/                   # MkDocs 사이트 에셋
 │   └── stylesheets/
-├── sqld/                   # SQLD 학습 노트 (8개 챕터)
-│   ├── README.md           # 학습 가이드
+├── docs/sqld/              # SQLD 학습 노트 (11개 챕터)
+│   ├── index.md            # 학습 가이드
 │   ├── 01_데이터_모델링.md
 │   ├── 02_정규화_반정규화.md
 │   ├── 03_DDL_DML_TCL.md
@@ -65,9 +65,12 @@ sql-practice/
 │   ├── 05_GROUP_BY_ORDER_BY.md
 │   ├── 06_JOIN.md
 │   ├── 07_서브쿼리_계층형.md
-│   └── 08_윈도우함수_그룹함수.md
-├── programmers/            # 프로그래머스 SQL Kit 풀이
-├── leetcode/               # LeetCode SQL 풀이
+│   ├── 08_윈도우함수_그룹함수.md
+│   ├── 09_PIVOT_UNPIVOT.md           # 2024 개정 신규
+│   ├── 10_정규표현식.md              # 2024 개정 신규
+│   └── 11_오브젝트_시퀀스_시노님.md
+├── docs/programmers/       # 프로그래머스 SQL Kit 풀이
+├── docs/leetcode/          # LeetCode SQL 풀이
 ├── mkdocs.yml              # MkDocs 설정
 └── requirements.txt        # Python 의존성
 ```
@@ -94,16 +97,25 @@ sql-practice/
 ## Learning Notes
 
 ### SQLD (1과목 · 데이터 모델링)
-- [01. 데이터 모델링의 이해](sqld/01_데이터_모델링.md) — 엔터티 · 속성 · 관계 · 식별자 · ERD
-- [02. 정규화 & 반정규화](sqld/02_정규화_반정규화.md) — 1NF/2NF/3NF/BCNF, 슈퍼·서브타입
+- [01. 데이터 모델링의 이해](docs/sqld/01_데이터_모델링.md) — 엔터티 · 속성 · 관계 · 식별자, 함수적 종속성
+- [02. 정규화 & 반정규화](docs/sqld/02_정규화_반정규화.md) — 1NF/2NF/3NF/BCNF, 슈퍼·서브타입
 
-### SQLD (2과목 · SQL 기본 및 활용)
-- [03. DDL · DML · TCL](sqld/03_DDL_DML_TCL.md) — 테이블 관리, 트랜잭션 (ACID)
-- [04. WHERE 절 & 함수](sqld/04_WHERE_함수.md) — 연산자, 함수, CASE / DECODE
-- [05. GROUP BY · ORDER BY](sqld/05_GROUP_BY_ORDER_BY.md) — 집계, 정렬, **SELECT 실행순서**
-- [06. JOIN](sqld/06_JOIN.md) — INNER · OUTER · NATURAL · CROSS, 집합 연산자
-- [07. 서브쿼리 & 계층형](sqld/07_서브쿼리_계층형.md) — 스칼라 · 인라인뷰, CONNECT BY
-- [08. 윈도우 함수 · DCL](sqld/08_윈도우함수_그룹함수.md) — RANK · LAG/LEAD, ROLLUP/CUBE, ROLE
+### SQLD (2과목 · SQL 기본)
+- [03. DDL · DML · TCL](docs/sqld/03_DDL_DML_TCL.md) — 테이블 관리, 트랜잭션 격리성, 제약조건
+- [04. WHERE 절 & 함수](docs/sqld/04_WHERE_함수.md) — 연산자, 함수, CASE / DECODE
+- [05. GROUP BY · ORDER BY](docs/sqld/05_GROUP_BY_ORDER_BY.md) — 집계, 정렬, **SELECT 실행순서**
+
+### SQLD (2과목 · SQL 활용)
+- [06. JOIN](docs/sqld/06_JOIN.md) — INNER · OUTER · NATURAL · CROSS, 집합 연산자
+- [07. 서브쿼리 & 계층형](docs/sqld/07_서브쿼리_계층형.md) — 스칼라 · 인라인뷰, CONNECT BY 가상칼럼
+- [08. 윈도우 함수 · TOP-N · DCL](docs/sqld/08_윈도우함수_그룹함수.md) — RANK · WINDOWING, ROWNUM/FETCH, WITH GRANT/ADMIN OPTION
+
+### SQLD (2024 개정 신규)
+- [09. PIVOT · UNPIVOT](docs/sqld/09_PIVOT_UNPIVOT.md) — LONG↔WIDE 변환
+- [10. 정규표현식](docs/sqld/10_정규표현식.md) — REGEXP_* 함수
+
+### SQLD (관리 구문)
+- [11. DB 오브젝트](docs/sqld/11_오브젝트_시퀀스_시노님.md) — View · Sequence · Synonym
 
 ---
 
