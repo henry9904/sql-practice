@@ -1,0 +1,66 @@
+/* 한국어 가독성 향상 */
+:root {
+  --md-text-font: "Noto Sans KR", -apple-system, "Apple SD Gothic Neo", sans-serif;
+  --md-code-font: "JetBrains Mono", "D2 Coding", monospace;
+}
+
+/* 본문 줄 간격 */
+.md-typeset {
+  line-height: 1.75;
+  font-size: 0.85rem;
+}
+
+/* 코드 블록 모서리 */
+.md-typeset pre > code {
+  border-radius: 6px;
+}
+
+/* 테이블 가독성 */
+.md-typeset table:not([class]) {
+  font-size: 0.78rem;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-fg-color--lightest);
+  font-weight: 600;
+}
+
+/* 헤더 마진 */
+.md-typeset h2 {
+  margin-top: 2.5em;
+  padding-top: 0.5em;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset h3 {
+  margin-top: 1.8em;
+}
+
+/* ★ 강조 색상 */
+.md-typeset strong {
+  color: var(--md-primary-fg-color);
+  font-weight: 700;
+}
+
+/* 인용구 */
+.md-typeset blockquote {
+  border-left-width: 3px;
+  color: var(--md-default-fg-color--light);
+}
+
+/* Mermaid 다이어그램 가운데 정렬 */
+.mermaid {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+/* 체크리스트 강조 */
+.md-typeset ul.task-list li {
+  padding-left: 0.5em;
+}
+
+/* 첫 페이지 타이틀 강조 */
+.md-typeset h1:first-of-type {
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+}

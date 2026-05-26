@@ -1,0 +1,111 @@
+site_name: SQL Practice & SQLD Notes
+site_description: 데이터 엔지니어를 향한 SQL 학습 기록 — SQLD 시험 대비 노트와 풀이 모음
+site_author: henry9904
+site_url: https://henry9904.github.io/sql-practice/
+
+repo_url: https://github.com/henry9904/sql-practice
+repo_name: henry9904/sql-practice
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 다크 모드로 전환
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 라이트 모드로 전환
+  font:
+    text: Noto Sans KR
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: "#"
+      toc_depth: 3
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - 홈: index.md
+  - SQLD 노트:
+      - 개요: sqld/index.md
+      - 1과목 — 데이터 모델링:
+          - 01. 데이터 모델링의 이해: sqld/01_데이터_모델링.md
+          - 02. 정규화 & 반정규화: sqld/02_정규화_반정규화.md
+      - 2과목 — SQL 기본 및 활용:
+          - 03. DDL · DML · TCL: sqld/03_DDL_DML_TCL.md
+          - 04. WHERE 절 & 함수: sqld/04_WHERE_함수.md
+          - 05. GROUP BY · ORDER BY: sqld/05_GROUP_BY_ORDER_BY.md
+          - 06. JOIN: sqld/06_JOIN.md
+          - 07. 서브쿼리 & 계층형: sqld/07_서브쿼리_계층형.md
+          - 08. 윈도우 함수 · DCL: sqld/08_윈도우함수_그룹함수.md
+  - 프로그래머스: programmers/index.md
+  - LeetCode: leetcode/index.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/henry9904
+      name: GitHub
+  generator: false
+
+copyright: Copyright &copy; 2026 henry9904 · 데이터 엔지니어 여정의 기록
